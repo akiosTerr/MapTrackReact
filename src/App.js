@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import ReactMapGL from 'react-map-gl';
+import SkateParkPOI from './components/skate_parks_visualization';
+import MarkerPath from './components/markerPath';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [viewport, setViewport] = useState({
+		latitude: 45.421106,
+		longitude: -75.690308,
+		width: '100vw',
+		height: '100vh',
+		zoom: 10
+	});
+
+	var setMarker = () => {};
+
+	return (
+		<div>
+			<ReactMapGL
+				{...viewport}
+				mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+				mapStyle='mapbox://styles/akiosdev/ck7577bk70xp01ileb5wfvs0h'
+				onViewportChange={setViewport}>
+				<MarkerPath />
+				<SkateParkPOI />
+			</ReactMapGL>
+		</div>
+	);
 }
 
 export default App;
