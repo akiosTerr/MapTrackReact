@@ -1,2 +1,0 @@
-# MapTrackReact
-react mapbox demo
